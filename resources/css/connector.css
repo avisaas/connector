@@ -1,0 +1,201 @@
+.avisaas-connector {
+    --at-primary: #066fd1;
+    --at-primary-soft: rgba(6, 111, 209, .1);
+    --at-surface: #ffffff;
+    --at-surface-2: #f9fafb;
+    --at-border: #e3e7ed;
+    --at-text: #182433;
+    --at-muted: #667382;
+    --at-hover: rgba(24, 36, 51, .04);
+    --ok: #2f9e44;
+    --ok-soft: #e6f4ea;
+    --warn: #b5700a;
+    --warn-soft: #fdf1dc;
+    --bad: #c92a2a;
+    --bad-soft: #fbe7e7;
+    --tile-bg: #e9ecef;
+    --tile-ink: #495057;
+    --shadow: 0 1px 2px rgba(24, 36, 51, .05), 0 10px 30px rgba(24, 36, 51, .08);
+    --radius: .5rem;
+    display: grid;
+    gap: 18px;
+    color: var(--at-text);
+    --bs-body-color: var(--at-text);
+    --bs-heading-color: var(--at-text);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+[data-bs-theme="dark"] .avisaas-connector {
+    --at-primary: #4c9bea;
+    --at-primary-soft: rgba(76, 155, 234, .14);
+    --at-surface: #182433;
+    --at-surface-2: #1c2a3b;
+    --at-border: #263649;
+    --at-text: #dce1e7;
+    --at-muted: #8d9bad;
+    --at-hover: rgba(255, 255, 255, .04);
+    --ok: #5cc27a;
+    --ok-soft: rgba(92, 194, 122, .13);
+    --warn: #f0b04a;
+    --warn-soft: rgba(240, 176, 74, .13);
+    --bad: #f07070;
+    --bad-soft: rgba(240, 112, 112, .13);
+    --tile-bg: #2a3a4e;
+    --tile-ink: #aeb8c5;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 12px 32px rgba(0, 0, 0, .35);
+}
+
+.avisaas-connector [hidden] { display: none !important; }
+.avisaas-connector button { font: inherit; color: inherit; cursor: pointer; }
+.avisaas-connector :focus-visible { outline: 2px solid var(--at-primary); outline-offset: 2px; }
+
+.avisaas-connector .ph { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 20px; }
+.avisaas-connector .ph h1 { margin: 0; font-size: 21px; line-height: 1.5; font-weight: 700; letter-spacing: -.01em; }
+.avisaas-connector .ph p { margin: 3px 0 0; color: var(--at-muted); }
+.avisaas-connector .ph .right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.avisaas-connector .asof { color: var(--at-muted); font-size: 12.5px; font-variant-numeric: tabular-nums; }
+
+.avisaas-connector .btn:not(:focus-visible) { box-shadow: none; }
+
+.avisaas-connector .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+    height: 34px; padding: 0 14px; border-radius: var(--radius);
+    border: 1px solid var(--at-border); background: var(--at-surface); color: var(--at-text);
+    font-size: 13px; font-weight: 500; white-space: nowrap; text-decoration: none;
+    transition: background .15s, border-color .15s;
+}
+.avisaas-connector .btn:hover { background: var(--at-surface-2); border-color: color-mix(in srgb, var(--at-muted) 35%, var(--at-border)); }
+.avisaas-connector .btn.primary { background: var(--at-primary); border-color: var(--at-primary); color: #fff; }
+.avisaas-connector .btn.primary:hover { background: color-mix(in srgb, var(--at-primary) 88%, #000); }
+.avisaas-connector .btn.buy { color: var(--at-primary); border-color: color-mix(in srgb, var(--at-primary) 45%, transparent); background: var(--at-primary-soft); }
+.avisaas-connector .btn.buy:hover { background: color-mix(in srgb, var(--at-primary) 18%, transparent); }
+.avisaas-connector .btn.danger { background: var(--bad); border-color: var(--bad); color: #fff; }
+.avisaas-connector .btn.danger:hover { background: color-mix(in srgb, var(--bad) 88%, #000); }
+.avisaas-connector .btn.ghost { border-color: transparent; background: transparent; color: var(--at-muted); }
+.avisaas-connector .btn.ghost:hover { background: var(--at-hover); color: var(--at-text); }
+.avisaas-connector .btn.icon { width: 34px; padding: 0; }
+.avisaas-connector .btn[disabled] { opacity: .6; cursor: default; }
+
+.avisaas-connector .card { background: var(--at-surface); border: 1px solid var(--at-border); border-radius: 10px; }
+
+.avisaas-connector .lic { padding: 18px 20px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 16px; align-items: center; }
+.avisaas-connector .lic .ico { grid-row: span 2; width: 42px; height: 42px; border-radius: 10px; display: grid; place-items: center; font-size: 17px; background: var(--at-primary-soft); color: var(--at-primary); }
+.avisaas-connector .lic.ok .ico { background: var(--ok-soft); color: var(--ok); }
+.avisaas-connector .lic.warn { border-color: color-mix(in srgb, var(--warn) 45%, var(--at-border)); }
+.avisaas-connector .lic.warn .ico { background: var(--warn-soft); color: var(--warn); }
+.avisaas-connector .lic h2 { margin: 0; font-size: 15px; font-weight: 600; }
+.avisaas-connector .lic p { margin: 0; color: var(--at-muted); font-size: 13px; }
+.avisaas-connector .lic form { grid-column: 1 / -1; display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+.avisaas-connector .lic input {
+    flex: 1 1 260px; height: 38px; border-radius: var(--radius);
+    border: 1px solid var(--at-border); background: var(--at-surface-2);
+    padding: 0 12px; font-family: ui-monospace, monospace; font-size: 13px; letter-spacing: .02em;
+}
+.avisaas-connector .lic input:focus { outline: none; border-color: var(--at-primary); box-shadow: 0 0 0 3px var(--at-primary-soft); }
+.avisaas-connector .lic .err { grid-column: 1 / -1; color: var(--bad); font-size: 12.5px; margin-top: 6px; }
+.avisaas-connector .lic .keyline { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
+.avisaas-connector .lic .key { font-family: ui-monospace, monospace; font-size: 13px; }
+.avisaas-connector .lic .covers { color: var(--at-muted); font-size: 13px; }
+.avisaas-connector .lic .rm { margin-left: auto; }
+.avisaas-connector .lic .full { grid-column: 1 / -1; }
+.avisaas-connector .hint { grid-column: 1 / -1; color: var(--at-muted); font-size: 12.5px; margin-top: 8px; }
+
+.avisaas-connector .tabs { display: flex; gap: 4px; flex-wrap: wrap; padding: 10px 14px 0; border-bottom: 1px solid var(--at-border); }
+.avisaas-connector .tabs button { border: 0; background: none; padding: 8px 10px 10px; color: var(--at-muted); font-weight: 500; font-size: 13px; border-bottom: 2px solid transparent; margin-bottom: -1px; display: inline-flex; gap: 6px; align-items: center; }
+.avisaas-connector .tabs button[aria-selected="true"] { color: var(--at-text); border-bottom-color: var(--at-primary); }
+.avisaas-connector .tabs .n { font-size: 11px; font-variant-numeric: tabular-nums; padding: 0 6px; border-radius: 999px; background: var(--at-surface-2); border: 1px solid var(--at-border); color: var(--at-muted); }
+.avisaas-connector .tabs .n.hot { background: var(--warn-soft); border-color: color-mix(in srgb, var(--warn) 35%, transparent); color: var(--warn); }
+
+.avisaas-connector .ext-row {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr) 190px 190px;
+    gap: 10px 16px; align-items: center;
+    padding: 14px 18px; position: relative;
+}
+.avisaas-connector :is(.ext-row, .group):not([hidden]) ~ :is(.ext-row, .group):not([hidden]) { border-top: 1px solid var(--at-border); }
+.avisaas-connector .ext-row.sub { padding-left: 46px; grid-template-columns: 36px minmax(0, 1fr) 190px 190px; background: color-mix(in srgb, var(--at-surface-2) 60%, transparent); }
+.avisaas-connector .tile { width: 44px; height: 44px; border-radius: 10px; display: grid; place-items: center; font-size: 18px; background: var(--tile-bg); color: var(--tile-ink); }
+.avisaas-connector .ext-row.sub .tile { width: 36px; height: 36px; font-size: 15px; border-radius: 8px; }
+.avisaas-connector .ext-row.off .tile { filter: grayscale(1); opacity: .55; }
+.avisaas-connector .nm { font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.avisaas-connector .tag { font-size: 10.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--at-muted); border: 1px solid var(--at-border); padding: 0 6px; border-radius: 4px; }
+.avisaas-connector .st { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
+.avisaas-connector .pill { font-size: 12px; font-weight: 500; padding: 2px 9px; border-radius: 999px; border: 1px solid transparent; white-space: nowrap; display: inline-flex; gap: 6px; align-items: center; font-variant-numeric: tabular-nums; }
+.avisaas-connector .pill.ok { color: var(--ok); background: var(--ok-soft); border-color: color-mix(in srgb, var(--ok) 30%, transparent); }
+.avisaas-connector .pill.warn { color: var(--warn); background: var(--warn-soft); border-color: color-mix(in srgb, var(--warn) 30%, transparent); }
+.avisaas-connector .pill.mute { color: var(--at-muted); background: var(--at-surface-2); border-color: var(--at-border); }
+.avisaas-connector .pill.own { color: var(--at-primary); background: var(--at-primary-soft); border-color: color-mix(in srgb, var(--at-primary) 30%, transparent); }
+.avisaas-connector .st small { color: var(--at-muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+.avisaas-connector .st a { color: var(--at-primary); }
+.avisaas-connector .ac { display: flex; justify-content: flex-end; align-items: center; gap: 6px; }
+
+.avisaas-connector .progress { grid-column: 3 / -1; display: grid; gap: 6px; height: auto; overflow: visible; font-size: inherit; background: none; border-radius: 0; }
+.avisaas-connector .progress .bar { height: 6px; border-radius: 999px; background: var(--at-surface-2); border: 1px solid var(--at-border); overflow: hidden; }
+.avisaas-connector .progress .bar i { display: block; height: 100%; background: var(--at-primary); border-radius: inherit; transition: width .45s ease; }
+.avisaas-connector .progress .lbl { font-size: 12.5px; color: var(--at-muted); display: flex; justify-content: space-between; gap: 8px; }
+.avisaas-connector .progress .bar i.ind { width: 40%; animation: avisaas-connector-slide 1.4s ease-in-out infinite; }
+.avisaas-connector .spin { animation: avisaas-connector-spin 1s linear infinite; }
+@keyframes avisaas-connector-slide { from { transform: translateX(-100%); } to { transform: translateX(250%); } }
+@keyframes avisaas-connector-spin { to { transform: rotate(360deg); } }
+
+.avisaas-connector .note { grid-column: 2 / -1; margin: 0; font-size: 12.5px; color: var(--warn); }
+
+.avisaas-connector .fail {
+    grid-column: 2 / -1; margin-top: 4px;
+    border: 1px solid color-mix(in srgb, var(--bad) 35%, transparent);
+    background: var(--bad-soft); border-radius: 8px; padding: 12px 14px;
+    display: grid; gap: 8px;
+}
+.avisaas-connector .fail h4 { margin: 0; font-size: 13.5px; color: var(--bad); font-weight: 600; }
+.avisaas-connector .fail p { margin: 0; font-size: 13px; }
+.avisaas-connector .cmd { display: flex; align-items: center; gap: 8px; background: var(--at-surface); border: 1px solid var(--at-border); border-radius: 6px; padding: 6px 6px 6px 10px; }
+.avisaas-connector .cmd code { flex: 1; font-family: ui-monospace, monospace; font-size: 12.5px; color: var(--at-text); overflow-x: auto; white-space: pre; }
+.avisaas-connector .acts { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.avisaas-connector .group { padding: 8px 18px 8px 46px; font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; font-weight: 600; color: var(--at-muted); background: color-mix(in srgb, var(--at-surface-2) 60%, transparent); }
+
+.avisaas-connector .menu { position: absolute; right: 18px; top: calc(100% - 8px); z-index: 20; min-width: 220px; background: var(--at-surface); border: 1px solid var(--at-border); border-radius: 8px; box-shadow: var(--shadow); padding: 5px; display: grid; }
+.avisaas-connector .menu button, .avisaas-connector .menu a { border: 0; background: none; text-align: left; padding: 8px 10px; border-radius: 6px; display: flex; gap: 10px; align-items: center; font-size: 13px; color: var(--at-text); text-decoration: none; }
+.avisaas-connector .menu button:hover, .avisaas-connector .menu a:hover { background: var(--at-hover); }
+.avisaas-connector .menu i { width: 14px; text-align: center; color: var(--at-muted); }
+.avisaas-connector .menu .sep { height: 1px; background: var(--at-border); margin: 4px 2px; }
+.avisaas-connector .menu .del, .avisaas-connector .menu .del i { color: var(--bad); }
+.avisaas-connector .confirm { padding: 8px 10px; display: grid; gap: 8px; font-size: 13px; }
+.avisaas-connector .confirm span { color: var(--at-muted); }
+.avisaas-connector .confirm label { display: flex; gap: 8px; align-items: center; color: var(--at-muted); font-size: 12.5px; }
+.avisaas-connector .confirm .acts { display: flex; gap: 6px; }
+
+.avisaas-connector .empty { padding: 36px 18px; text-align: center; color: var(--at-muted); }
+.avisaas-connector .notice { display: flex; gap: 10px; align-items: flex-start; margin: 14px 18px; padding: 12px 14px; border-radius: 8px; font-size: 13px; border: 1px solid color-mix(in srgb, var(--warn) 35%, transparent); background: var(--warn-soft); }
+.avisaas-connector .notice i { margin-top: 3px; color: var(--warn); }
+.avisaas-connector .notice.bad { border-color: color-mix(in srgb, var(--bad) 35%, transparent); background: var(--bad-soft); }
+.avisaas-connector .notice.bad i { color: var(--bad); }
+
+.avisaas-connector dialog.dlg { width: min(440px, calc(100% - 32px)); max-height: calc(100vh - 32px); padding: 0; border: 0; border-radius: 12px; background: var(--at-surface); color: var(--at-text); box-shadow: var(--shadow); }
+.avisaas-connector dialog.dlg::backdrop { background: rgba(12, 18, 28, .5); }
+.avisaas-connector .dlg .info { padding: 24px; display: grid; gap: 16px; align-content: start; }
+.avisaas-connector .dlg .hd { display: flex; gap: 14px; align-items: center; }
+.avisaas-connector .dlg .hd .tile { flex: none; width: 52px; height: 52px; font-size: 22px; border-radius: 12px; }
+.avisaas-connector .dlg h3 { margin: 0 0 6px; font-size: 18px; line-height: 1.5; font-weight: 700; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.avisaas-connector .dlg .acts { justify-content: flex-end; }
+.avisaas-connector .dev { font-size: 12.5px; color: var(--at-muted); }
+.avisaas-connector .dev summary { cursor: pointer; }
+.avisaas-connector .dev .mono { display: block; margin-top: 6px; font-family: ui-monospace, monospace; font-size: 12px; overflow-wrap: anywhere; }
+.avisaas-connector .dev .cmd { margin-top: 8px; }
+
+@media (max-width: 860px) {
+    .avisaas-connector .ext-row, .avisaas-connector .ext-row.sub { grid-template-columns: 44px minmax(0, 1fr); }
+    .avisaas-connector .ext-row.sub { padding-left: 18px; }
+    .avisaas-connector .ext-row.sub .tile { width: 44px; height: 44px; }
+    .avisaas-connector .ext-row .st, .avisaas-connector .ext-row .ac, .avisaas-connector .progress, .avisaas-connector .fail { grid-column: 2 / -1; }
+    .avisaas-connector .ac { justify-content: flex-start; flex-wrap: wrap; }
+    .avisaas-connector .menu { right: auto; left: 62px; }
+    .avisaas-connector .group { padding-left: 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .avisaas-connector .progress .bar i { transition: none; }
+    .avisaas-connector .progress .bar i.ind { animation: none; width: 100%; opacity: .45; }
+    .avisaas-connector .spin { animation: none; }
+}

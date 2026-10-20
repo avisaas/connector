@@ -1,0 +1,14 @@
+vendor/
+node_modules/
+tests/
+.wwebjs_auth/
+.wwebjs_cache/
+composer.lock
+.DS_Store
+*.backup
+.defaults-seeded
+.translations-table-created
+*.md
+!README.md
+!LICENSE.md
+!LICENSE_PROPRIETARY.md

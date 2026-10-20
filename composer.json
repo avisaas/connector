@@ -1,0 +1,30 @@
+{
+  "name": "avisaas/ti-ext-connector",
+  "version": "1.3.0",
+  "license": "proprietary",
+  "type": "tastyigniter-package",
+  "description": "AviSaaS storefront connector extension for TastyIgniter admin.",
+  "require": {
+    "php": "^8.3",
+    "tastyigniter/core": "^4.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "AviSaaS\\Connector\\": "src/"
+    }
+  },
+  "extra": {
+    "tastyigniter-extension": {
+      "code": "avisaas.connector",
+      "name": "AviSaaS Connector",
+      "author": "AviSaaS",
+      "icon": {
+        "class": "fa fa-plug",
+        "color": "#FFF",
+        "backgroundColor": "#6B7280"
+      }
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
