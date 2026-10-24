@@ -47,18 +47,20 @@ final class CataloguePresenter
 
     private function resolveInstallState(array $product, array $installed, ?string $advertisedVersion): array
     {
-        if (!$product['owned']) {
+        $free = $this->isFree($product);
+
+        if (!$product['owned'] && !$free) {
             return [($product['buy_url'] ?? null) !== null ? 'buyable' : 'unavailable', null];
         }
 
         $package = $product['composer_package'] ?? null;
         if ($package === null) {
-            return ['owned_unknown_package', null];
+            return [$free ? 'free_not_installed' : 'owned_unknown_package', null];
         }
 
         $package = strtolower($package);
         if (!array_key_exists($package, $installed)) {
-            return ['owned_not_installed', null];
+            return [$free ? 'free_not_installed' : 'owned_not_installed', null];
         }
 
         $installedVersion = $installed[$package];
@@ -69,11 +71,20 @@ final class CataloguePresenter
 
     private function licenceState(array $product): ?string
     {
+        if ($this->isFree($product)) {
+            return 'free';
+        }
+
         if (!$product['owned']) {
             return null;
         }
 
         return in_array($product['state'] ?? null, ['expired', 'stopped'], true) ? $product['state'] : 'active';
+    }
+
+    private function isFree(array $product): bool
+    {
+        return ($product['free'] ?? null) === true;
     }
 
     private function isTheme(mixed $package): bool

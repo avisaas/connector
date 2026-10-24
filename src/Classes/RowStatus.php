@@ -19,7 +19,7 @@ final class RowStatus
         $status = $this->resolve($row, $installed);
         $href = null;
 
-        if (in_array($status['action'], ['buy', 'renew'], true)) {
+        if (in_array($status['action'], ['buy', 'renew', 'view'], true)) {
             $href = $this->safeUrl($row['buy_url']);
 
             if ($href === null) {
@@ -49,6 +49,7 @@ final class RowStatus
             'installed' => $this->status('ok', 'fa-check', 'Up to date', $this->installedLine($row), null),
             'owned_not_installed' => $this->status('own', null, 'Owned', $this->notInstalledLine($row), 'install'),
             'owned_unknown_package' => $this->status('own', null, 'Owned', 'Install status unknown', null),
+            'free_not_installed' => $this->status('ok', null, 'Free', $this->latestLine($row), 'view'),
             default => $this->status('mute', null, 'Not owned', $this->latestLine($row), 'buy'),
         };
     }
@@ -66,7 +67,7 @@ final class RowStatus
             $tabs[] = 'installed';
         }
 
-        if ($row['state'] === 'update_available' && $row['licence_state'] === 'active') {
+        if ($row['state'] === 'update_available' && in_array($row['licence_state'], ['active', 'free'], true)) {
             $tabs[] = 'updates';
         }
 
@@ -86,7 +87,9 @@ final class RowStatus
 
     private function installedLine(array $row): string
     {
-        return trim('Installed '.$row['installed_version']);
+        $line = trim('Installed '.$row['installed_version']);
+
+        return $row['licence_state'] === 'free' ? 'Free · '.$line : $line;
     }
 
     private function notInstalledLine(array $row): string

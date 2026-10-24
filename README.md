@@ -39,8 +39,8 @@ Connecting also prepares your site's Composer: it adds the AviSaaS download addr
 
 The Marketplace lists every AviSaaS extension and theme, with tabs for All, Installed, Updates and Not owned. Each row shows:
 
-- its state: **Up to date** with the installed version, **Update to** a newer version, **Disabled**, **Owned** but not installed yet, **Not owned**, or the date its updates ended;
-- the button that fits: **Install**, **Update**, **Enable**, **Buy** or **Renew**;
+- its state: **Up to date** with the installed version, **Update to** a newer version, **Disabled**, **Owned** but not installed yet, **Not owned**, **Free** (needs no licence key), or the date its updates ended;
+- the button that fits: **Install**, **Update**, **Enable**, **Buy**, **Renew**, or **View** for a free item that is not installed yet;
 - a three-dot menu with **View details**, **Check for updates**, **Disable** and **Delete**. Delete asks first and keeps the extension's settings and data unless you tick **Also delete its settings and data**.
 
 Installs, updates and deletes run one at a time and can take a few minutes. Keep the page open.
@@ -60,6 +60,10 @@ Run the lines in a terminal in your site's root folder, or send them to your hos
 - Delete: `composer remove <package>`. Delete does not start when Composer is missing or PHP isn't allowed to start it, so nothing is removed. If Composer starts and then fails after you ticked **Also delete its settings and data**, the box says the settings and data are already gone and only the files remain.
 
 If the page itself stops waiting, the action may still be running. Reload the page in a few minutes to see the result.
+
+## The daily count
+
+The connector sends its site address and version to avisaas once a day, along with the TastyIgniter version your site runs. This is a count only: it tells us how many sites use the connector. Removing the connector stops it.
 
 ## Advanced: a different licence server
 

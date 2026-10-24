@@ -7,6 +7,7 @@ enum KeyExchangeKind
     case Connected;
     case DomainMismatch;
     case InvalidKey;
+    case ServerError;
     case Throttled;
     case Unreachable;
 }
@@ -23,6 +24,10 @@ final class KeyExchangeResult
 
     public static function fromResponse(int $status, mixed $decodedBody, ?string $retryAfterHeader): self
     {
+        if ($status >= 500 && $status <= 599) {
+            return new self(KeyExchangeKind::ServerError);
+        }
+
         return match ($status) {
             200 => self::fromSuccessBody($decodedBody),
             403 => self::fromForbiddenBody($decodedBody),
@@ -49,6 +54,11 @@ final class KeyExchangeResult
     public function isInvalidKey(): bool
     {
         return $this->kind === KeyExchangeKind::InvalidKey;
+    }
+
+    public function isServerError(): bool
+    {
+        return $this->kind === KeyExchangeKind::ServerError;
     }
 
     public function isThrottled(): bool
@@ -82,6 +92,7 @@ final class KeyExchangeResult
             KeyExchangeKind::Connected => null,
             KeyExchangeKind::DomainMismatch => "This key is locked to {$this->domain}. To use it here, change the website in your avisaas account, under Licences.",
             KeyExchangeKind::InvalidKey => "We don't recognise that licence key. Check your purchase email.",
+            KeyExchangeKind::ServerError => 'avisaas had a problem on our side. Try again later.',
             KeyExchangeKind::Throttled => $this->throttledMessage(),
             KeyExchangeKind::Unreachable => "Couldn't reach avisaas. Try again in a few minutes.",
         };

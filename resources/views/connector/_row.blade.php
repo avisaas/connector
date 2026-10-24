@@ -25,6 +25,7 @@
                 @break
             @case('buy')
             @case('renew')
+            @case('view')
                 <a class="btn buy" href="{{ $status['href'] }}" target="_blank" rel="noopener noreferrer">{{ ucfirst($status['action']) }}</a>
                 @break
         @endswitch

@@ -2,6 +2,7 @@
 
 namespace AviSaaS\Connector;
 
+use AviSaaS\Connector\Classes\InstallReport;
 use Igniter\Flame\Support\Facades\Igniter;
 use Igniter\System\Classes\BaseExtension;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,11 @@ class Extension extends BaseExtension
         Route::middleware(config('igniter-routes.adminMiddleware', ['web', 'igniter', 'igniter:admin']))
             ->prefix(Igniter::adminUri())
             ->group(__DIR__.'/../routes/admin.php');
+
+        
+        Route::get('avisaas-install-check/connector', [InstallReport::class, 'answer']);
+
+        $this->app->make(InstallReport::class)->sendIfDue();
     }
 
     public function registerPermissions(): array
