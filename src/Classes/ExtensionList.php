@@ -10,11 +10,14 @@ final class ExtensionList
 
     private const POS_GROUP_LABEL = 'Point of Sale services';
 
+    private const FREE_GROUP_LABEL = 'Free extensions · no licence needed';
+
     private const TABS = [
         'all' => ['All', 'No extensions are listed yet.'],
         'installed' => ['Installed', 'Nothing installed yet.'],
         'updates' => ['Updates', 'Everything is up to date.'],
         'notowned' => ['Not owned', 'You own every extension.'],
+        'free' => ['Free', 'No free extensions right now.'],
     ];
 
     public function __construct(private readonly RowStatus $rowStatus) {}
@@ -37,7 +40,7 @@ final class ExtensionList
                 $counts[$tab]++;
             }
 
-            $entries[] = ['kind' => 'row', 'row' => $item['row'], 'status' => $status, 'sub' => $item['sub']];
+            $entries[] = ['kind' => 'row', 'row' => $item['row'], 'status' => $status, 'sub' => $item['sub'], 'grouped' => $item['grouped']];
         }
 
         $tabs = [];
@@ -51,11 +54,27 @@ final class ExtensionList
 
     private function arrange(array $rows): array
     {
+        $free = array_filter($rows, fn (array $row): bool => $row['licence_state'] === 'free');
+        $arranged = $this->arrangePosServices(array_diff_key($rows, $free));
+
+        if ($free !== []) {
+            $arranged[] = ['group' => self::FREE_GROUP_LABEL];
+
+            foreach ($free as $row) {
+                $arranged[] = ['row' => $row, 'sub' => false, 'grouped' => true];
+            }
+        }
+
+        return $arranged;
+    }
+
+    private function arrangePosServices(array $rows): array
+    {
         $rows = array_values($rows);
         $posAt = array_search(self::POS_KEY, array_column($rows, 'key'), true);
 
         if ($posAt === false) {
-            return array_map(fn (array $row): array => ['row' => $row, 'sub' => false], $rows);
+            return array_map(fn (array $row): array => ['row' => $row, 'sub' => false, 'grouped' => false], $rows);
         }
 
         $services = array_filter($rows, fn (array $row): bool => in_array($row['key'], self::POS_SERVICES, true));
@@ -68,13 +87,13 @@ final class ExtensionList
                 continue;
             }
 
-            $arranged[] = ['row' => $row, 'sub' => false];
+            $arranged[] = ['row' => $row, 'sub' => false, 'grouped' => false];
 
             if ($index === $posAt && $services !== []) {
                 $arranged[] = ['group' => self::POS_GROUP_LABEL];
 
                 foreach ($services as $service) {
-                    $arranged[] = ['row' => $service, 'sub' => true];
+                    $arranged[] = ['row' => $service, 'sub' => true, 'grouped' => true];
                 }
             }
         }

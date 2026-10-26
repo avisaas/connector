@@ -364,6 +364,7 @@ class Connector extends AdminController
             'row' => $entry['row'],
             'status' => $entry['status'],
             'sub' => $entry['sub'],
+            'grouped' => $entry['grouped'],
             'canInstall' => $this->canInstall(),
             'canToggle' => $this->canToggle(),
             'notice' => $notice,

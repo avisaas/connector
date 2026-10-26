@@ -39,8 +39,8 @@ Connecting also prepares your site's Composer: it adds the AviSaaS download addr
 
 The Marketplace lists every AviSaaS extension and theme, with tabs for All, Installed, Updates and Not owned. Each row shows:
 
-- its state: **Up to date** with the installed version, **Update to** a newer version, **Disabled**, **Owned** but not installed yet, **Not owned**, **Free** (needs no licence key), or the date its updates ended;
-- the button that fits: **Install**, **Update**, **Enable**, **Buy**, **Renew**, or **View** for a free item that is not installed yet;
+- its state: **Up to date** with the installed version, **Update to** a newer version, **Disabled**, **Owned** but not installed yet, **Coming soon** (you own it, but it can't be downloaded yet), **Not owned**, **Free** (needs no licence key), or the date its updates ended;
+- the button that fits: **Install** (a free item installs without a licence key), **Update**, **Enable**, **Buy** or **Renew**. A **Coming soon** row has no button;
 - a three-dot menu with **View details**, **Check for updates**, **Disable** and **Delete**. Delete asks first and keeps the extension's settings and data unless you tick **Also delete its settings and data**.
 
 Installs, updates and deletes run one at a time and can take a few minutes. Keep the page open.

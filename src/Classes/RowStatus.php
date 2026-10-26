@@ -19,7 +19,7 @@ final class RowStatus
         $status = $this->resolve($row, $installed);
         $href = null;
 
-        if (in_array($status['action'], ['buy', 'renew', 'view'], true)) {
+        if (in_array($status['action'], ['buy', 'renew'], true)) {
             $href = $this->safeUrl($row['buy_url']);
 
             if ($href === null) {
@@ -48,8 +48,9 @@ final class RowStatus
             'update_available' => $this->status('warn', 'fa-arrow-up', 'Update to '.$row['advertised_version'], $this->installedLine($row), 'update'),
             'installed' => $this->status('ok', 'fa-check', 'Up to date', $this->installedLine($row), null),
             'owned_not_installed' => $this->status('own', null, 'Owned', $this->notInstalledLine($row), 'install'),
-            'owned_unknown_package' => $this->status('own', null, 'Owned', 'Install status unknown', null),
-            'free_not_installed' => $this->status('ok', null, 'Free', $this->latestLine($row), 'view'),
+            'owned_coming_soon' => $this->status('own', null, 'Coming soon', $this->withUpdatesUntil($row, 'Not installed'), null),
+            'owned_unknown_package' => $this->status('own', null, 'Owned', $this->withUpdatesUntil($row, 'Install status unknown'), null),
+            'free_not_installed' => $this->status('ok', null, 'Free', $this->latestLine($row), $row['composer_package'] === null ? null : 'install'),
             default => $this->status('mute', null, 'Not owned', $this->latestLine($row), 'buy'),
         };
     }
@@ -75,6 +76,10 @@ final class RowStatus
             $tabs[] = 'notowned';
         }
 
+        if ($row['licence_state'] === 'free') {
+            $tabs[] = 'free';
+        }
+
         return $tabs;
     }
 
@@ -85,18 +90,25 @@ final class RowStatus
         return $date === null ? 'Updates ended' : 'Updates ended '.$date;
     }
 
+    private function withUpdatesUntil(array $row, string $line): string
+    {
+        $date = $row['licence_state'] === 'active' ? $this->expiryDate->display($row['expires_at'], $this->timezone) : null;
+
+        return $date === null ? $line : $line.' · Updates until '.$date;
+    }
+
     private function installedLine(array $row): string
     {
         $line = trim('Installed '.$row['installed_version']);
 
-        return $row['licence_state'] === 'free' ? 'Free · '.$line : $line;
+        return $this->withUpdatesUntil($row, $row['licence_state'] === 'free' ? 'Free · '.$line : $line);
     }
 
     private function notInstalledLine(array $row): string
     {
         $version = (string) $row['advertised_version'];
 
-        return $version === '' ? 'Not installed' : 'Not installed · '.$version.' available';
+        return $this->withUpdatesUntil($row, $version === '' ? 'Not installed' : 'Not installed · '.$version.' available');
     }
 
     private function latestLine(array $row): ?string

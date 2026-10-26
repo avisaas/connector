@@ -1,5 +1,5 @@
 @php($toggleable = $canToggle && !$row['is_theme'])
-<div @class(['ext-row', 'sub' => $sub, 'off' => $row['disabled']]) id="connector-row-{{ $row['key'] }}" data-tabs="{{ implode(' ', $status['tabs']) }}">
+<div @class(['ext-row', 'sub' => $sub, 'off' => $row['disabled']]) id="connector-row-{{ $row['key'] }}" data-tabs="{{ implode(' ', $status['tabs']) }}" @if ($grouped) data-grouped @endif>
     @include('avisaas.connector::connector._tile', ['icon' => $row['icon']])
 
     <div class="nm">{{ $row['label'] }}@if ($row['is_theme'])<span class="tag">Theme</span>@endif</div>
@@ -25,7 +25,6 @@
                 @break
             @case('buy')
             @case('renew')
-            @case('view')
                 <a class="btn buy" href="{{ $status['href'] }}" target="_blank" rel="noopener noreferrer">{{ ucfirst($status['action']) }}</a>
                 @break
         @endswitch

@@ -60,13 +60,20 @@ final class CataloguePresenter
 
         $package = strtolower($package);
         if (!array_key_exists($package, $installed)) {
-            return [$free ? 'free_not_installed' : 'owned_not_installed', null];
+            return [$free ? 'free_not_installed' : $this->ownedNotInstalledState($product), null];
         }
 
         $installedVersion = $installed[$package];
         $state = $this->hasUpdate($advertisedVersion, $installedVersion) ? 'update_available' : 'installed';
 
         return [$state, $installedVersion];
+    }
+
+    private function ownedNotInstalledState(array $product): string
+    {
+        $comingSoon = $this->licenceState($product) === 'active' && ($product['downloadable'] ?? null) === false;
+
+        return $comingSoon ? 'owned_coming_soon' : 'owned_not_installed';
     }
 
     private function licenceState(array $product): ?string

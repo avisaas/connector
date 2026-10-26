@@ -11,7 +11,7 @@
         @if ($entry['kind'] === 'group')
             <div class="group">{{ $entry['label'] }}</div>
         @else
-            @include('avisaas.connector::connector._row', ['row' => $entry['row'], 'status' => $entry['status'], 'sub' => $entry['sub'], 'notice' => null, 'fail' => null])
+            @include('avisaas.connector::connector._row', ['row' => $entry['row'], 'status' => $entry['status'], 'sub' => $entry['sub'], 'grouped' => $entry['grouped'], 'notice' => null, 'fail' => null])
         @endif
     @endforeach
 </div>

@@ -65,7 +65,7 @@
                 continue;
             }
 
-            if (!entry.classList.contains('sub')) {
+            if (!entry.hasAttribute('data-grouped')) {
                 groupHasRows = false;
             }
 
@@ -73,7 +73,7 @@
 
             if (!entry.hidden) {
                 shown++;
-                groupHasRows = groupHasRows || entry.classList.contains('sub');
+                groupHasRows = groupHasRows || entry.hasAttribute('data-grouped');
             }
         }
 
