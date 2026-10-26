@@ -188,6 +188,10 @@ final class ComposerRun
             if ($installed['type'] === 'theme') {
                 $this->themes->loadTheme($path);
 
+                
+                
+                \Igniter\Main\Models\Theme::syncAll();
+
                 if (!$this->themes->installTheme($code, $version)) {
                     throw new \RuntimeException('The theme was not registered.');
                 }
